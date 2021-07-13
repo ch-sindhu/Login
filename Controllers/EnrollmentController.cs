@@ -11,6 +11,7 @@ namespace WebApplication2.Controllers
 {
     public class EnrollmentController : Controller
     {
+
         public string value = "";
         [HttpGet]
         public ActionResult Index()
@@ -23,7 +24,7 @@ namespace WebApplication2.Controllers
 
             Enroll er = new Enroll();
             SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["constr"].ToString());
-            
+
             SqlCommand cmd = new SqlCommand("proc_EnrollDetails", con);
             cmd.CommandType = CommandType.StoredProcedure;
             cmd.Parameters.AddWithValue("@FirstName", e.FirstName);
@@ -34,8 +35,11 @@ namespace WebApplication2.Controllers
             cmd.Parameters.AddWithValue("@Gender", e.Gender);
             //cmd.Parameters.AddWithValue("@status", "INSERT");
             con.Open();
-            ViewData["result"]=cmd.ExecuteNonQuery();
+            ViewData["result"] = cmd.ExecuteNonQuery();
             return View();
         }
     }
 }
+
+
+   

@@ -14,7 +14,7 @@
     <script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
     <link href="~/Content/bootstrap.css" rel="stylesheet" />
 
-
+    <link href="~/CSS/style.css" rel="stylesheet" type="text/css" />
     <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
     <link href="~/Content/bootstrap.rtl.css" rel="stylesheet" />
     <link href="~/Content/bootstrap-grid.css" rel="stylesheet" />
@@ -23,11 +23,11 @@
     <script src="~/Scripts/bootstrap.min.js"></script>
     <script src="~/Scripts/bootstrap.bundle.js"></script>
     <script src="~/Scripts/bootstrap.js"></script>
-
-    <a href="~/Scripts/bootstrap.js.map"></a>
-    
+    <link href="~/CSS/style.css" rel="stylesheet" />
+    @*<a href="~/Scripts/bootstrap.js.map"></a>*@
+<link href="~/CSS/coin-slider.css" rel="stylesheet" />
     <script src="~/Scripts/bootstrap.min.js"></script>
-    <a href="~/Scripts/bootstrap.bundle.js.map"></a>
+    @*<a href="~/Scripts/bootstrap.bundle.js.map"></a>*@
 
     @Scripts.Render("~/bundles/jqueryval")
 
@@ -48,7 +48,7 @@
                             <a class="nav-link active" id="home-tab" data-toggle="tab" href="../Enrollment/Index" role="tab" aria-controls="home" aria-selected="true">Register</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" id="profile-tab" data-toggle="tab" href="../UserLogin/Index" role="tab" aria-controls="profile" aria-selected="false">Login</a>
+                            <a class="nav-link " id="profile-tab" data-toggle="tab" href="../User/Index" role="tab" aria-controls="profile" aria-selected="true">Login</a>
                         </li>
                     </ul>
                     <div class="tab-content" id="myTabContent">
@@ -70,13 +70,13 @@
                                     </div>
                                     <div class="form-group">
 
-                                        @Html.TextBoxFor(e => e.Password, new { @class = "form-control", placeholder = "password*" })
+                                        @Html.PasswordFor(e => e.Password, new { @class = "form-control", placeholder = "password*" })
                                         <span id="result"></span>
                                         @Html.ValidationMessageFor(e => e.Password, "", new { @class = "text-danger" })
                                     </div>
                                     <div class="form-group">
 
-                                        @Html.TextAreaFor(e => e.Confirmpwd, new { @class = "form-control", placeholder = "confirm password*" })
+                                        @Html.PasswordFor(e => e.Confirmpwd, new { @class = "form-control", placeholder = "confirm password*" })
                                         @Html.ValidationMessageFor(e => e.Confirmpwd, "", new { @class = "text-danger" })
 
                                     </div>
@@ -111,9 +111,9 @@
                                   </div>
                                   
                                 
-                                <td>
-                                  <input type="submit" class=" btnRegister" value="Register" />
-                                </td>
+                                   <div>
+                                      <input type="submit" class=" btnRegister" value="Register" />
+                                   </div>
                            </div>
                         </div>
 
@@ -127,6 +127,7 @@
                     var msg = '@ViewData["result"]';
                     if (msg =='1') {
                         alert("User Details inserted successfully");
+                        window.location.href = "@Url.Action("Index", "Enrollment")";
 
                     }
                 })

@@ -1,0 +1,95 @@
+﻿@model WebApplication2.Models.Enroll
+
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+
+
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <script src="~/Scripts/bootstrap.js"></script>
+    <script src="~/Scripts/jquery-3.6.0.js"></script>
+    <script src="~/Scripts/jquery-3.6.0.min.js"></script>
+    <script src="~/Scripts/jquery.validate.js"></script>
+    <script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+    <link href="~/CSS/style.css" rel="stylesheet" type="text/css"/>
+    <link href="~/CSS/coin-slider.css" rel="stylesheet" />
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $.ajax({
+                type: 'POST',
+                url: 'User/User',
+                data: data,
+                dataType: 'JSON',
+                success: function (data) {
+                    data = data.status
+                    if (status == "1") {
+                        window.location.href = '@Url.Action("Index,User")';
+                    }
+
+                }
+            });
+        });
+
+    </script>
+
+</head>
+<body>
+    @using (Html.BeginForm("Index", "User", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+        <div class="container register">
+            <div class="row">
+                <div class="col-md-3 register-left">
+                    <h3>Welcome</h3>
+                </div>
+                <div class="col-md-9 register-right">
+                    <ul class="nav nav-tabs nav-justified" id="myTab" role="tablist">
+                        <li class="nav-item">
+                            <a class="nav-link " id="profile-tab" data-toggle="tab" href="../Enrollment/Index" role="tab" aria-controls="home" aria-selected="true">Register</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" id="home-tab" data-toggle="tab" href="../User/Index" role="tab" aria-controls="profile" aria-selected="false">Login</a>
+                        </li>
+                    </ul>
+                    <div class="tab-content" id="myTabContent">
+                        <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                            <h3 class="register-heading">Login as a Employee</h3>
+                            <div class="row register-form">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        @Html.TextBoxFor(e => e.Email, new { @class = "form-control", placeholder = "Your Email*" })
+                                        @Html.ValidationMessageFor(e => e.Email, "", new { @class = "text-danger" })
+                                    </div>
+                                    <div class="from-group">
+                                       @Html.PasswordFor(e => e.Password, new {@class="form-control",placeholder="Your Password*"})
+                                       @Html.ValidationMessageFor(e => e.Password, "", new { @class = "text-danger" })
+                                    </div>
+                                    <div class="col-md-6">
+                                        <input type="submit" class="btnLogin" value="Login" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <script type="text/javascript">
+                $(function () {
+                    var ["msg"]='@ViewData["result"]';
+                    if (msg == '1') {
+                        alert("User Details inserted succesfully");
+                        window.location.href = "@Url.Action("Index","User")";
+                    }
+                });
+
+            </script>
+
+        </div>
+    }
+</body>
+</html>
